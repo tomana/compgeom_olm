@@ -5,6 +5,7 @@ cases where more than one facet is intersecting a triangle. Using [Dolfin](https
 
 ### Short description:
 
+#### Classes:
 _TesselateMeshIntersect.cpp/h_ is the main class tesselating the partially overlapped elements of one mesh with respect to the boundary of another.
 
 _TesselateTriangle.cpp/h_ is the class triangulating each individual triangle.
