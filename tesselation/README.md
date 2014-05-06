@@ -10,14 +10,14 @@ _TesselateMeshIntersect.cpp/h_ is the main class tesselating the partially overl
 
 _TesselateTriangle.cpp/h_ is the class triangulating each individual triangle.
 
-#### Functions:
+#### Notes about some functions:
 
 init(mesh, collidingMesh) takes the two input meshes, _mesh_ beign the background mesh and _collidingMesh_ being the overlapping mesh.
 
-``` triangulate_first(...) ``` calls a collision detecting algorithm to fill the map
+The function ``` triangulate_first(...) ``` calls a collision detecting algorithm to fill the map
 ```cpp
 boost::unordered_map<size_t, std::vector< size_t > > intersectionsetFirstMesh
 ```
-associating indexes in the first input _mesh_ to a vector of indexes with the colliding entities in _collidingMesh_.
+associating indexes in the first input _mesh_ to a vector of indexes with the colliding entities in _collidingMesh_. A collision detection algorithm capable of returning the needed map is available in ```../bvh```. 
 
 
