@@ -1,6 +1,6 @@
 ## Greedy tesselation algorithm for triangulating triangles with respect to multiple intersecting facets.
 
-Novel implementation of an algorithm _find references_, extended to handle 
+Implementation of an algorithm based on http://paulbourke.net/geometry/polygonise/ ported to to LibCutFEM (https://bitbucket.org/massing/cutfem) here extended to handle 
 cases where more than one facet is intersecting a triangle. Using [Dolfin](https://bitbucket.org/fenics-project/dolfin) datastructures.
 
 ### Short description:
