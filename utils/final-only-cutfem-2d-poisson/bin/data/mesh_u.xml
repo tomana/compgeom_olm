@@ -1,0 +1,643 @@
+<?xml version="1.0"?>
+<dolfin xmlns:dolfin="http://fenicsproject.org">
+  <mesh celltype="triangle" dim="2">
+    <vertices size="144">
+      <vertex index="0" x="1.000000000000000e+00" y="0.000000000000000e+00" />
+      <vertex index="1" x="1.000000000000000e+00" y="1.000000000000000e+00" />
+      <vertex index="2" x="0.000000000000000e+00" y="1.000000000000000e+00" />
+      <vertex index="3" x="0.000000000000000e+00" y="0.000000000000000e+00" />
+      <vertex index="4" x="1.000000000000000e+00" y="5.000000000000000e-01" />
+      <vertex index="5" x="5.000000000000000e-01" y="1.000000000000000e+00" />
+      <vertex index="6" x="0.000000000000000e+00" y="5.000000000000000e-01" />
+      <vertex index="7" x="5.000000000000000e-01" y="0.000000000000000e+00" />
+      <vertex index="8" x="5.000000000000000e-01" y="5.000000000000000e-01" />
+      <vertex index="9" x="2.500000000000000e-01" y="0.000000000000000e+00" />
+      <vertex index="10" x="0.000000000000000e+00" y="2.500000000000000e-01" />
+      <vertex index="11" x="2.500000000000000e-01" y="1.000000000000000e+00" />
+      <vertex index="12" x="0.000000000000000e+00" y="7.500000000000000e-01" />
+      <vertex index="13" x="1.000000000000000e+00" y="2.500000000000000e-01" />
+      <vertex index="14" x="7.500000000000000e-01" y="0.000000000000000e+00" />
+      <vertex index="15" x="1.000000000000000e+00" y="7.500000000000000e-01" />
+      <vertex index="16" x="7.500000000000000e-01" y="1.000000000000000e+00" />
+      <vertex index="17" x="7.083333333333333e-01" y="2.916666666666667e-01" />
+      <vertex index="18" x="2.916666666666666e-01" y="7.083333333333334e-01" />
+      <vertex index="19" x="2.500000000000000e-01" y="3.750000000000000e-01" />
+      <vertex index="20" x="7.500000000000000e-01" y="6.250000000000000e-01" />
+      <vertex index="21" x="5.366379310344828e-01" y="7.535919540229885e-01" />
+      <vertex index="22" x="4.633620689655172e-01" y="2.464080459770115e-01" />
+      <vertex index="23" x="1.875000000000000e-01" y="1.875000000000000e-01" />
+      <vertex index="24" x="8.125000000000000e-01" y="8.125000000000000e-01" />
+      <vertex index="25" x="8.690476190476190e-01" y="3.750000000000000e-01" />
+      <vertex index="26" x="3.907147988505748e-01" y="8.578227627257800e-01" />
+      <vertex index="27" x="1.825980392156863e-01" y="5.526960784313726e-01" />
+      <vertex index="28" x="6.092852011494252e-01" y="1.421772372742201e-01" />
+      <vertex index="29" x="8.385416666666666e-01" y="1.614583333333334e-01" />
+      <vertex index="30" x="1.614583333333333e-01" y="8.385416666666667e-01" />
+      <vertex index="31" x="6.736111111111112e-01" y="4.652777777777778e-01" />
+      <vertex index="32" x="6.570970491253563e-01" y="8.648656830417855e-01" />
+      <vertex index="33" x="3.429029508746437e-01" y="1.351343169582145e-01" />
+      <vertex index="34" x="3.459343228031954e-01" y="5.542676561365287e-01" />
+      <vertex index="35" x="5.625809640150556e-01" y="3.615159311863891e-01" />
+      <vertex index="36" x="1.468843613834422e-01" y="6.937593613834423e-01" />
+      <vertex index="37" x="1.198894451397580e-01" y="4.272788902795161e-01" />
+      <vertex index="38" x="6.091269841269842e-01" y="5.942460317460317e-01" />
+      <vertex index="39" x="8.750000000000000e-01" y="6.875000000000000e-01" />
+      <vertex index="40" x="4.013446521014302e-01" y="3.848106957971396e-01" />
+      <vertex index="41" x="8.544456845238095e-01" y="5.213913690476191e-01" />
+      <vertex index="42" x="4.609893646226430e-01" y="6.350787238829518e-01" />
+      <vertex index="43" x="1.250000000000000e-01" y="0.000000000000000e+00" />
+      <vertex index="44" x="0.000000000000000e+00" y="1.250000000000000e-01" />
+      <vertex index="45" x="1.000000000000000e+00" y="8.750000000000000e-01" />
+      <vertex index="46" x="8.750000000000000e-01" y="1.000000000000000e+00" />
+      <vertex index="47" x="2.968432764284035e-01" y="2.552189078571989e-01" />
+      <vertex index="48" x="7.031567235715964e-01" y="7.447810921428012e-01" />
+      <vertex index="49" x="3.750000000000000e-01" y="0.000000000000000e+00" />
+      <vertex index="50" x="0.000000000000000e+00" y="6.250000000000000e-01" />
+      <vertex index="51" x="0.000000000000000e+00" y="8.750000000000000e-01" />
+      <vertex index="52" x="8.750000000000000e-01" y="0.000000000000000e+00" />
+      <vertex index="53" x="6.250000000000000e-01" y="0.000000000000000e+00" />
+      <vertex index="54" x="1.000000000000000e+00" y="3.750000000000000e-01" />
+      <vertex index="55" x="3.750000000000000e-01" y="1.000000000000000e+00" />
+      <vertex index="56" x="1.000000000000000e+00" y="1.250000000000000e-01" />
+      <vertex index="57" x="1.250000000000000e-01" y="1.000000000000000e+00" />
+      <vertex index="58" x="6.250000000000000e-01" y="1.000000000000000e+00" />
+      <vertex index="59" x="0.000000000000000e+00" y="3.750000000000000e-01" />
+      <vertex index="60" x="1.000000000000000e+00" y="6.250000000000000e-01" />
+      <vertex index="61" x="1.464554482683620e-01" y="3.053481839105460e-01" />
+      <vertex index="62" x="4.674958019604437e-01" y="1.210948484735260e-01" />
+      <vertex index="63" x="5.325041980395562e-01" y="8.789051515264740e-01" />
+      <vertex index="64" x="4.059483227812213e-01" y="7.401712126597377e-01" />
+      <vertex index="65" x="7.267794195177409e-01" y="1.177405871461850e-01" />
+      <vertex index="66" x="2.732205804822590e-01" y="8.822594128538149e-01" />
+      <vertex index="67" x="6.011943791111383e-01" y="2.550962033437885e-01" />
+      <vertex index="68" x="8.199404761904761e-01" y="2.730654761904762e-01" />
+      <vertex index="69" x="7.805483585267607e-01" y="4.400964900881961e-01" />
+      <vertex index="70" x="3.209781793414511e-01" y="4.523195798059299e-01" />
+      <vertex index="71" x="8.906250000000000e-01" y="8.906250000000000e-01" />
+      <vertex index="72" x="1.875000000000000e-01" y="8.333333333333333e-02" />
+      <vertex index="73" x="9.062500000000000e-01" y="7.812500000000000e-01" />
+      <vertex index="74" x="1.006944444444444e-01" y="1.354166666666667e-01" />
+      <vertex index="75" x="7.545696325008384e-01" y="8.973565441669461e-01" />
+      <vertex index="76" x="9.824630723118558e-02" y="6.063928842305680e-01" />
+      <vertex index="77" x="2.090340151496561e-01" y="4.610923478694774e-01" />
+      <vertex index="78" x="2.255589031291991e-01" y="6.386252337033450e-01" />
+      <vertex index="79" x="7.612400075664947e-01" y="5.318817497276286e-01" />
+      <vertex index="80" x="4.102610126084632e-01" y="4.770161324177848e-01" />
+      <vertex index="81" x="3.660471328039073e-01" y="6.479425162090522e-01" />
+      <vertex index="82" x="2.443849864749983e-01" y="7.912599864749984e-01" />
+      <vertex index="83" x="8.088068113262378e-01" y="7.275782389636425e-02" />
+      <vertex index="84" x="9.292674731182795e-01" y="1.875000000000000e-01" />
+      <vertex index="85" x="9.075246902758297e-01" y="9.218971500852073e-02" />
+      <vertex index="86" x="7.073252688172042e-02" y="8.125000000000000e-01" />
+      <vertex index="87" x="9.247530972417010e-02" y="9.078102849914793e-01" />
+      <vertex index="88" x="1.911931886737623e-01" y="9.272421761036358e-01" />
+      <vertex index="89" x="9.121050213379069e-01" y="2.781978201831695e-01" />
+      <vertex index="90" x="7.916878157143976e-01" y="7.239689078571988e-01" />
+      <vertex index="91" x="7.569917881560967e-01" y="2.052203575498256e-01" />
+      <vertex index="92" x="9.345238095238094e-01" y="4.375000000000000e-01" />
+      <vertex index="93" x="9.087883257131378e-02" y="5.146380244823888e-01" />
+      <vertex index="94" x="4.535422667745593e-01" y="9.226200446356096e-01" />
+      <vertex index="95" x="5.625000000000000e-01" y="6.504899166751485e-02" />
+      <vertex index="96" x="5.358765591800528e-01" y="1.936667353972301e-01" />
+      <vertex index="97" x="4.696767301155717e-01" y="8.141078696166443e-01" />
+      <vertex index="98" x="9.348362560379583e-01" y="5.625000000000000e-01" />
+      <vertex index="99" x="6.681225332203866e-01" y="6.620299886382088e-01" />
+      <vertex index="100" x="5.912147266313933e-01" y="5.046847442680776e-01" />
+      <vertex index="101" x="6.570708422117766e-01" y="3.716919462201331e-01" />
+      <vertex index="102" x="1.058844305584241e-01" y="2.251463194396636e-01" />
+      <vertex index="103" x="5.483105295551617e-01" y="6.627408229647620e-01" />
+      <vertex index="104" x="7.845935289385899e-01" y="3.528899222770644e-01" />
+      <vertex index="105" x="3.315937672093262e-01" y="7.860407253022678e-01" />
+      <vertex index="106" x="6.250000000000000e-02" y="0.000000000000000e+00" />
+      <vertex index="107" x="8.366662964191570e-01" y="6.079174071616860e-01" />
+      <vertex index="108" x="6.216544953411172e-01" y="7.823957032929999e-01" />
+      <vertex index="109" x="3.823454936222687e-01" y="2.932011385826609e-01" />
+      <vertex index="110" x="4.380300635171008e-01" y="5.552756114958081e-01" />
+      <vertex index="111" x="2.698767422228260e-01" y="5.188574167321782e-01" />
+      <vertex index="112" x="6.875000000000000e-01" y="1.000000000000000e+00" />
+      <vertex index="113" x="6.793071958648350e-01" y="5.487309788847985e-01" />
+      <vertex index="114" x="3.871802756885950e-01" y="2.080402357542647e-01" />
+      <vertex index="115" x="2.701895350604135e-01" y="1.761199671037664e-01" />
+      <vertex index="116" x="2.739290892776194e-01" y="8.305098362488122e-02" />
+      <vertex index="117" x="6.704989160525103e-01" y="2.033126396216697e-01" />
+      <vertex index="118" x="4.874195747116130e-01" y="4.109326983670510e-01" />
+      <vertex index="119" x="4.649186029078616e-01" y="3.302016652848865e-01" />
+      <vertex index="120" x="0.000000000000000e+00" y="6.875000000000000e-01" />
+      <vertex index="121" x="0.000000000000000e+00" y="3.125000000000000e-01" />
+      <vertex index="122" x="8.016681840474618e-02" y="3.547647834695740e-01" />
+      <vertex index="123" x="7.322605135514757e-01" y="8.199240278289671e-01" />
+      <vertex index="124" x="2.272375296147893e-01" y="2.970480476830920e-01" />
+      <vertex index="125" x="8.125000000000000e-01" y="1.000000000000000e+00" />
+      <vertex index="126" x="7.779087012130122e-02" y="7.332372058804687e-01" />
+      <vertex index="127" x="3.125000000000000e-01" y="1.000000000000000e+00" />
+      <vertex index="128" x="3.432561209481666e-01" y="9.243171609464860e-01" />
+      <vertex index="129" x="6.566976626752724e-01" y="7.546062541083429e-02" />
+      <vertex index="130" x="5.299882175949631e-01" y="2.870816782138715e-01" />
+      <vertex index="131" x="3.274579558167156e-01" y="3.523593387973511e-01" />
+      <vertex index="132" x="1.000000000000000e+00" y="9.375000000000000e-01" />
+      <vertex index="133" x="5.259578195443489e-01" y="5.816470454746745e-01" />
+      <vertex index="134" x="5.625000000000000e-01" y="1.000000000000000e+00" />
+      <vertex index="135" x="6.005390654136388e-01" y="9.228110509230952e-01" />
+      <vertex index="136" x="4.375000000000000e-01" y="0.000000000000000e+00" />
+      <vertex index="137" x="3.994609345863612e-01" y="7.718894907690471e-02" />
+      <vertex index="138" x="6.032318279875872e-01" y="4.278335411943608e-01" />
+      <vertex index="139" x="8.617466517857142e-01" y="4.481956845238095e-01" />
+      <vertex index="140" x="2.823090528752064e-01" y="5.915411625429050e-01" />
+      <vertex index="141" x="0.000000000000000e+00" y="1.875000000000000e-01" />
+      <vertex index="142" x="1.739886709633492e-01" y="7.641556768950915e-01" />
+      <vertex index="143" x="0.000000000000000e+00" y="5.625000000000000e-01" />
+    </vertices>
+    <cells size="243">
+      <triangle index="0" v0="13" v1="56" v2="84" />
+      <triangle index="1" v0="33" v1="114" v2="115" />
+      <triangle index="2" v0="19" v1="61" v2="124" />
+      <triangle index="3" v0="19" v1="37" v2="61" />
+      <triangle index="4" v0="23" v1="61" v2="124" />
+      <triangle index="5" v0="27" v1="76" v2="78" />
+      <triangle index="6" v0="47" v1="109" v2="114" />
+      <triangle index="7" v0="18" v1="82" v2="142" />
+      <triangle index="8" v0="30" v1="87" v2="88" />
+      <triangle index="9" v0="29" v1="83" v2="85" />
+      <triangle index="10" v0="40" v1="80" v2="118" />
+      <triangle index="11" v0="29" v1="68" v2="91" />
+      <triangle index="12" v0="48" v1="108" v2="123" />
+      <triangle index="13" v0="32" v1="75" v2="123" />
+      <triangle index="14" v0="20" v1="48" v2="90" />
+      <triangle index="15" v0="39" v1="98" v2="107" />
+      <triangle index="16" v0="41" v1="69" v2="79" />
+      <triangle index="17" v0="21" v1="103" v2="108" />
+      <triangle index="18" v0="8" v1="80" v2="118" />
+      <triangle index="19" v0="18" v1="82" v2="105" />
+      <triangle index="20" v0="34" v1="70" v2="80" />
+      <triangle index="21" v0="27" v1="76" v2="93" />
+      <triangle index="22" v0="31" v1="69" v2="79" />
+      <triangle index="23" v0="41" v1="69" v2="139" />
+      <triangle index="24" v0="34" v1="80" v2="110" />
+      <triangle index="25" v0="9" v1="43" v2="72" />
+      <triangle index="26" v0="31" v1="101" v2="138" />
+      <triangle index="27" v0="43" v1="74" v2="106" />
+      <triangle index="28" v0="29" v1="65" v2="91" />
+      <triangle index="29" v0="30" v1="66" v2="82" />
+      <triangle index="30" v0="12" v1="51" v2="86" />
+      <triangle index="31" v0="35" v1="118" v2="119" />
+      <triangle index="32" v0="35" v1="67" v2="101" />
+      <triangle index="33" v0="32" v1="108" v2="123" />
+      <triangle index="34" v0="47" v1="114" v2="115" />
+      <triangle index="35" v0="21" v1="42" v2="64" />
+      <triangle index="36" v0="42" v1="64" v2="81" />
+      <triangle index="37" v0="8" v1="110" v2="133" />
+      <triangle index="38" v0="35" v1="67" v2="130" />
+      <triangle index="39" v0="6" v1="93" v2="143" />
+      <triangle index="40" v0="37" v1="77" v2="93" />
+      <triangle index="41" v0="38" v1="99" v2="113" />
+      <triangle index="42" v0="41" v1="79" v2="107" />
+      <triangle index="43" v0="41" v1="98" v2="107" />
+      <triangle index="44" v0="40" v1="70" v2="80" />
+      <triangle index="45" v0="40" v1="109" v2="131" />
+      <triangle index="46" v0="15" v1="39" v2="60" />
+      <triangle index="47" v0="20" v1="79" v2="107" />
+      <triangle index="48" v0="38" v1="103" v2="133" />
+      <triangle index="49" v0="21" v1="42" v2="103" />
+      <triangle index="50" v0="43" v1="72" v2="74" />
+      <triangle index="51" v0="23" v1="72" v2="74" />
+      <triangle index="52" v0="24" v1="71" v2="75" />
+      <triangle index="53" v0="24" v1="75" v2="123" />
+      <triangle index="54" v0="1" v1="46" v2="132" />
+      <triangle index="55" v0="19" v1="124" v2="131" />
+      <triangle index="56" v0="47" v1="124" v2="131" />
+      <triangle index="57" v0="99" v1="103" v2="108" />
+      <triangle index="58" v0="20" v1="48" v2="99" />
+      <triangle index="59" v0="49" v1="136" v2="137" />
+      <triangle index="60" v0="9" v1="72" v2="116" />
+      <triangle index="61" v0="50" v1="76" v2="120" />
+      <triangle index="62" v0="30" v1="86" v2="87" />
+      <triangle index="63" v0="57" v1="87" v2="88" />
+      <triangle index="64" v0="29" v1="84" v2="85" />
+      <triangle index="65" v0="14" v1="52" v2="83" />
+      <triangle index="66" v0="17" v1="68" v2="91" />
+      <triangle index="67" v0="7" v1="53" v2="95" />
+      <triangle index="68" v0="25" v1="69" v2="139" />
+      <triangle index="69" v0="13" v1="84" v2="89" />
+      <triangle index="70" v0="26" v1="66" v2="105" />
+      <triangle index="71" v0="5" v1="63" v2="94" />
+      <triangle index="72" v0="56" v1="84" v2="85" />
+      <triangle index="73" v0="52" v1="83" v2="85" />
+      <triangle index="74" v0="51" v1="86" v2="87" />
+      <triangle index="75" v0="11" v1="57" v2="88" />
+      <triangle index="76" v0="58" v1="134" v2="135" />
+      <triangle index="77" v0="32" v1="63" v2="135" />
+      <triangle index="78" v0="59" v1="121" v2="122" />
+      <triangle index="79" v0="6" v1="37" v2="59" />
+      <triangle index="80" v0="39" v1="60" v2="98" />
+      <triangle index="81" v0="4" v1="60" v2="98" />
+      <triangle index="82" v0="23" v1="74" v2="102" />
+      <triangle index="83" v0="28" v1="65" v2="129" />
+      <triangle index="84" v0="22" v1="62" v2="96" />
+      <triangle index="85" v0="63" v1="94" v2="97" />
+      <triangle index="86" v0="21" v1="63" v2="97" />
+      <triangle index="87" v0="26" v1="94" v2="97" />
+      <triangle index="88" v0="66" v1="82" v2="105" />
+      <triangle index="89" v0="14" v1="53" v2="129" />
+      <triangle index="90" v0="14" v1="65" v2="129" />
+      <triangle index="91" v0="11" v1="66" v2="127" />
+      <triangle index="92" v0="28" v1="95" v2="96" />
+      <triangle index="93" v0="17" v1="91" v2="117" />
+      <triangle index="94" v0="25" v1="68" v2="89" />
+      <triangle index="95" v0="17" v1="67" v2="101" />
+      <triangle index="96" v0="25" v1="68" v2="104" />
+      <triangle index="97" v0="25" v1="69" v2="104" />
+      <triangle index="98" v0="19" v1="70" v2="77" />
+      <triangle index="99" v0="19" v1="37" v2="77" />
+      <triangle index="100" v0="15" v1="39" v2="73" />
+      <triangle index="101" v0="15" v1="45" v2="73" />
+      <triangle index="102" v0="33" v1="115" v2="116" />
+      <triangle index="103" v0="23" v1="47" v2="115" />
+      <triangle index="104" v0="45" v1="71" v2="73" />
+      <triangle index="105" v0="24" v1="71" v2="73" />
+      <triangle index="106" v0="44" v1="74" v2="141" />
+      <triangle index="107" v0="16" v1="75" v2="125" />
+      <triangle index="108" v0="27" v1="77" v2="93" />
+      <triangle index="109" v0="36" v1="76" v2="78" />
+      <triangle index="110" v0="70" v1="77" v2="111" />
+      <triangle index="111" v0="27" v1="77" v2="111" />
+      <triangle index="112" v0="34" v1="70" v2="111" />
+      <triangle index="113" v0="18" v1="64" v2="81" />
+      <triangle index="114" v0="20" v1="79" v2="113" />
+      <triangle index="115" v0="31" v1="79" v2="113" />
+      <triangle index="116" v0="42" v1="81" v2="110" />
+      <triangle index="117" v0="34" v1="81" v2="110" />
+      <triangle index="118" v0="34" v1="81" v2="140" />
+      <triangle index="119" v0="34" v1="111" v2="140" />
+      <triangle index="120" v0="36" v1="78" v2="142" />
+      <triangle index="121" v0="18" v1="78" v2="142" />
+      <triangle index="122" v0="29" v1="65" v2="83" />
+      <triangle index="123" v0="14" v1="65" v2="83" />
+      <triangle index="124" v0="29" v1="68" v2="89" />
+      <triangle index="125" v0="29" v1="84" v2="89" />
+      <triangle index="126" v0="0" v1="52" v2="85" />
+      <triangle index="127" v0="0" v1="56" v2="85" />
+      <triangle index="128" v0="30" v1="82" v2="142" />
+      <triangle index="129" v0="30" v1="86" v2="142" />
+      <triangle index="130" v0="2" v1="57" v2="87" />
+      <triangle index="131" v0="2" v1="51" v2="87" />
+      <triangle index="132" v0="30" v1="66" v2="88" />
+      <triangle index="133" v0="11" v1="66" v2="88" />
+      <triangle index="134" v0="13" v1="54" v2="89" />
+      <triangle index="135" v0="25" v1="54" v2="89" />
+      <triangle index="136" v0="39" v1="73" v2="90" />
+      <triangle index="137" v0="24" v1="73" v2="90" />
+      <triangle index="138" v0="28" v1="65" v2="117" />
+      <triangle index="139" v0="65" v1="91" v2="117" />
+      <triangle index="140" v0="25" v1="54" v2="92" />
+      <triangle index="141" v0="4" v1="54" v2="92" />
+      <triangle index="142" v0="6" v1="37" v2="93" />
+      <triangle index="143" v0="5" v1="55" v2="94" />
+      <triangle index="144" v0="55" v1="127" v2="128" />
+      <triangle index="145" v0="62" v1="95" v2="96" />
+      <triangle index="146" v0="7" v1="62" v2="95" />
+      <triangle index="147" v0="28" v1="67" v2="96" />
+      <triangle index="148" v0="22" v1="119" v2="130" />
+      <triangle index="149" v0="26" v1="64" v2="97" />
+      <triangle index="150" v0="21" v1="64" v2="97" />
+      <triangle index="151" v0="41" v1="92" v2="98" />
+      <triangle index="152" v0="4" v1="92" v2="98" />
+      <triangle index="153" v0="42" v1="103" v2="133" />
+      <triangle index="154" v0="20" v1="99" v2="113" />
+      <triangle index="155" v0="35" v1="119" v2="130" />
+      <triangle index="156" v0="35" v1="101" v2="138" />
+      <triangle index="157" v0="69" v1="101" v2="104" />
+      <triangle index="158" v0="31" v1="69" v2="101" />
+      <triangle index="159" v0="23" v1="61" v2="102" />
+      <triangle index="160" v0="10" v1="102" v2="121" />
+      <triangle index="161" v0="38" v1="99" v2="103" />
+      <triangle index="162" v0="48" v1="99" v2="108" />
+      <triangle index="163" v0="17" v1="101" v2="104" />
+      <triangle index="164" v0="17" v1="68" v2="104" />
+      <triangle index="165" v0="18" v1="64" v2="105" />
+      <triangle index="166" v0="26" v1="64" v2="105" />
+      <triangle index="167" v0="44" v1="74" v2="106" />
+      <triangle index="168" v0="3" v1="44" v2="106" />
+      <triangle index="169" v0="39" v1="90" v2="107" />
+      <triangle index="170" v0="20" v1="90" v2="107" />
+      <triangle index="171" v0="32" v1="63" v2="108" />
+      <triangle index="172" v0="21" v1="63" v2="108" />
+      <triangle index="173" v0="22" v1="109" v2="114" />
+      <triangle index="174" v0="40" v1="118" v2="119" />
+      <triangle index="175" v0="8" v1="80" v2="110" />
+      <triangle index="176" v0="42" v1="110" v2="133" />
+      <triangle index="177" v0="27" v1="78" v2="140" />
+      <triangle index="178" v0="27" v1="111" v2="140" />
+      <triangle index="179" v0="32" v1="75" v2="112" />
+      <triangle index="180" v0="16" v1="75" v2="112" />
+      <triangle index="181" v0="38" v1="100" v2="113" />
+      <triangle index="182" v0="31" v1="100" v2="113" />
+      <triangle index="183" v0="33" v1="62" v2="114" />
+      <triangle index="184" v0="22" v1="62" v2="114" />
+      <triangle index="185" v0="23" v1="72" v2="115" />
+      <triangle index="186" v0="72" v1="115" v2="116" />
+      <triangle index="187" v0="9" v1="49" v2="116" />
+      <triangle index="188" v0="33" v1="62" v2="137" />
+      <triangle index="189" v0="17" v1="67" v2="117" />
+      <triangle index="190" v0="28" v1="67" v2="117" />
+      <triangle index="191" v0="31" v1="100" v2="138" />
+      <triangle index="192" v0="8" v1="100" v2="138" />
+      <triangle index="193" v0="40" v1="109" v2="119" />
+      <triangle index="194" v0="22" v1="109" v2="119" />
+      <triangle index="195" v0="12" v1="120" v2="126" />
+      <triangle index="196" v0="12" v1="86" v2="126" />
+      <triangle index="197" v0="61" v1="102" v2="122" />
+      <triangle index="198" v0="102" v1="121" v2="122" />
+      <triangle index="199" v0="37" v1="61" v2="122" />
+      <triangle index="200" v0="37" v1="59" v2="122" />
+      <triangle index="201" v0="48" v1="90" v2="123" />
+      <triangle index="202" v0="24" v1="90" v2="123" />
+      <triangle index="203" v0="23" v1="47" v2="124" />
+      <triangle index="204" v0="47" v1="109" v2="131" />
+      <triangle index="205" v0="71" v1="75" v2="125" />
+      <triangle index="206" v0="46" v1="71" v2="125" />
+      <triangle index="207" v0="76" v1="120" v2="126" />
+      <triangle index="208" v0="36" v1="76" v2="126" />
+      <triangle index="209" v0="26" v1="94" v2="128" />
+      <triangle index="210" v0="55" v1="94" v2="128" />
+      <triangle index="211" v0="66" v1="127" v2="128" />
+      <triangle index="212" v0="26" v1="66" v2="128" />
+      <triangle index="213" v0="28" v1="95" v2="129" />
+      <triangle index="214" v0="53" v1="95" v2="129" />
+      <triangle index="215" v0="22" v1="96" v2="130" />
+      <triangle index="216" v0="67" v1="96" v2="130" />
+      <triangle index="217" v0="40" v1="70" v2="131" />
+      <triangle index="218" v0="19" v1="70" v2="131" />
+      <triangle index="219" v0="46" v1="71" v2="132" />
+      <triangle index="220" v0="45" v1="71" v2="132" />
+      <triangle index="221" v0="8" v1="100" v2="133" />
+      <triangle index="222" v0="38" v1="100" v2="133" />
+      <triangle index="223" v0="5" v1="63" v2="134" />
+      <triangle index="224" v0="63" v1="134" v2="135" />
+      <triangle index="225" v0="32" v1="112" v2="135" />
+      <triangle index="226" v0="58" v1="112" v2="135" />
+      <triangle index="227" v0="7" v1="62" v2="136" />
+      <triangle index="228" v0="62" v1="136" v2="137" />
+      <triangle index="229" v0="33" v1="116" v2="137" />
+      <triangle index="230" v0="49" v1="116" v2="137" />
+      <triangle index="231" v0="8" v1="118" v2="138" />
+      <triangle index="232" v0="35" v1="118" v2="138" />
+      <triangle index="233" v0="25" v1="92" v2="139" />
+      <triangle index="234" v0="41" v1="92" v2="139" />
+      <triangle index="235" v0="18" v1="81" v2="140" />
+      <triangle index="236" v0="18" v1="78" v2="140" />
+      <triangle index="237" v0="74" v1="102" v2="141" />
+      <triangle index="238" v0="10" v1="102" v2="141" />
+      <triangle index="239" v0="86" v1="126" v2="142" />
+      <triangle index="240" v0="36" v1="126" v2="142" />
+      <triangle index="241" v0="76" v1="93" v2="143" />
+      <triangle index="242" v0="50" v1="76" v2="143" />
+    </cells>
+    <domains>
+      <mesh_value_collection name="m" type="uint" dim="2" size="243">
+        <value cell_index="0" local_entity="0" value="2" />
+        <value cell_index="1" local_entity="0" value="2" />
+        <value cell_index="2" local_entity="0" value="2" />
+        <value cell_index="3" local_entity="0" value="2" />
+        <value cell_index="4" local_entity="0" value="2" />
+        <value cell_index="5" local_entity="0" value="2" />
+        <value cell_index="6" local_entity="0" value="2" />
+        <value cell_index="7" local_entity="0" value="2" />
+        <value cell_index="8" local_entity="0" value="2" />
+        <value cell_index="9" local_entity="0" value="2" />
+        <value cell_index="10" local_entity="0" value="2" />
+        <value cell_index="11" local_entity="0" value="2" />
+        <value cell_index="12" local_entity="0" value="2" />
+        <value cell_index="13" local_entity="0" value="2" />
+        <value cell_index="14" local_entity="0" value="2" />
+        <value cell_index="15" local_entity="0" value="2" />
+        <value cell_index="16" local_entity="0" value="2" />
+        <value cell_index="17" local_entity="0" value="2" />
+        <value cell_index="18" local_entity="0" value="2" />
+        <value cell_index="19" local_entity="0" value="2" />
+        <value cell_index="20" local_entity="0" value="2" />
+        <value cell_index="21" local_entity="0" value="2" />
+        <value cell_index="22" local_entity="0" value="2" />
+        <value cell_index="23" local_entity="0" value="2" />
+        <value cell_index="24" local_entity="0" value="2" />
+        <value cell_index="25" local_entity="0" value="2" />
+        <value cell_index="26" local_entity="0" value="2" />
+        <value cell_index="27" local_entity="0" value="2" />
+        <value cell_index="28" local_entity="0" value="2" />
+        <value cell_index="29" local_entity="0" value="2" />
+        <value cell_index="30" local_entity="0" value="2" />
+        <value cell_index="31" local_entity="0" value="2" />
+        <value cell_index="32" local_entity="0" value="2" />
+        <value cell_index="33" local_entity="0" value="2" />
+        <value cell_index="34" local_entity="0" value="2" />
+        <value cell_index="35" local_entity="0" value="2" />
+        <value cell_index="36" local_entity="0" value="2" />
+        <value cell_index="37" local_entity="0" value="2" />
+        <value cell_index="38" local_entity="0" value="2" />
+        <value cell_index="39" local_entity="0" value="2" />
+        <value cell_index="40" local_entity="0" value="2" />
+        <value cell_index="41" local_entity="0" value="2" />
+        <value cell_index="42" local_entity="0" value="2" />
+        <value cell_index="43" local_entity="0" value="2" />
+        <value cell_index="44" local_entity="0" value="2" />
+        <value cell_index="45" local_entity="0" value="2" />
+        <value cell_index="46" local_entity="0" value="2" />
+        <value cell_index="47" local_entity="0" value="2" />
+        <value cell_index="48" local_entity="0" value="2" />
+        <value cell_index="49" local_entity="0" value="2" />
+        <value cell_index="50" local_entity="0" value="2" />
+        <value cell_index="51" local_entity="0" value="2" />
+        <value cell_index="52" local_entity="0" value="2" />
+        <value cell_index="53" local_entity="0" value="2" />
+        <value cell_index="54" local_entity="0" value="2" />
+        <value cell_index="55" local_entity="0" value="2" />
+        <value cell_index="56" local_entity="0" value="2" />
+        <value cell_index="57" local_entity="0" value="2" />
+        <value cell_index="58" local_entity="0" value="2" />
+        <value cell_index="59" local_entity="0" value="2" />
+        <value cell_index="60" local_entity="0" value="2" />
+        <value cell_index="61" local_entity="0" value="2" />
+        <value cell_index="62" local_entity="0" value="2" />
+        <value cell_index="63" local_entity="0" value="2" />
+        <value cell_index="64" local_entity="0" value="2" />
+        <value cell_index="65" local_entity="0" value="2" />
+        <value cell_index="66" local_entity="0" value="2" />
+        <value cell_index="67" local_entity="0" value="2" />
+        <value cell_index="68" local_entity="0" value="2" />
+        <value cell_index="69" local_entity="0" value="2" />
+        <value cell_index="70" local_entity="0" value="2" />
+        <value cell_index="71" local_entity="0" value="2" />
+        <value cell_index="72" local_entity="0" value="2" />
+        <value cell_index="73" local_entity="0" value="2" />
+        <value cell_index="74" local_entity="0" value="2" />
+        <value cell_index="75" local_entity="0" value="2" />
+        <value cell_index="76" local_entity="0" value="2" />
+        <value cell_index="77" local_entity="0" value="2" />
+        <value cell_index="78" local_entity="0" value="2" />
+        <value cell_index="79" local_entity="0" value="2" />
+        <value cell_index="80" local_entity="0" value="2" />
+        <value cell_index="81" local_entity="0" value="2" />
+        <value cell_index="82" local_entity="0" value="2" />
+        <value cell_index="83" local_entity="0" value="2" />
+        <value cell_index="84" local_entity="0" value="2" />
+        <value cell_index="85" local_entity="0" value="2" />
+        <value cell_index="86" local_entity="0" value="2" />
+        <value cell_index="87" local_entity="0" value="2" />
+        <value cell_index="88" local_entity="0" value="2" />
+        <value cell_index="89" local_entity="0" value="2" />
+        <value cell_index="90" local_entity="0" value="2" />
+        <value cell_index="91" local_entity="0" value="2" />
+        <value cell_index="92" local_entity="0" value="2" />
+        <value cell_index="93" local_entity="0" value="2" />
+        <value cell_index="94" local_entity="0" value="2" />
+        <value cell_index="95" local_entity="0" value="2" />
+        <value cell_index="96" local_entity="0" value="2" />
+        <value cell_index="97" local_entity="0" value="2" />
+        <value cell_index="98" local_entity="0" value="2" />
+        <value cell_index="99" local_entity="0" value="2" />
+        <value cell_index="100" local_entity="0" value="2" />
+        <value cell_index="101" local_entity="0" value="2" />
+        <value cell_index="102" local_entity="0" value="2" />
+        <value cell_index="103" local_entity="0" value="2" />
+        <value cell_index="104" local_entity="0" value="2" />
+        <value cell_index="105" local_entity="0" value="2" />
+        <value cell_index="106" local_entity="0" value="2" />
+        <value cell_index="107" local_entity="0" value="2" />
+        <value cell_index="108" local_entity="0" value="2" />
+        <value cell_index="109" local_entity="0" value="2" />
+        <value cell_index="110" local_entity="0" value="2" />
+        <value cell_index="111" local_entity="0" value="2" />
+        <value cell_index="112" local_entity="0" value="2" />
+        <value cell_index="113" local_entity="0" value="2" />
+        <value cell_index="114" local_entity="0" value="2" />
+        <value cell_index="115" local_entity="0" value="2" />
+        <value cell_index="116" local_entity="0" value="2" />
+        <value cell_index="117" local_entity="0" value="2" />
+        <value cell_index="118" local_entity="0" value="2" />
+        <value cell_index="119" local_entity="0" value="2" />
+        <value cell_index="120" local_entity="0" value="2" />
+        <value cell_index="121" local_entity="0" value="2" />
+        <value cell_index="122" local_entity="0" value="2" />
+        <value cell_index="123" local_entity="0" value="2" />
+        <value cell_index="124" local_entity="0" value="2" />
+        <value cell_index="125" local_entity="0" value="2" />
+        <value cell_index="126" local_entity="0" value="2" />
+        <value cell_index="127" local_entity="0" value="2" />
+        <value cell_index="128" local_entity="0" value="2" />
+        <value cell_index="129" local_entity="0" value="2" />
+        <value cell_index="130" local_entity="0" value="2" />
+        <value cell_index="131" local_entity="0" value="2" />
+        <value cell_index="132" local_entity="0" value="2" />
+        <value cell_index="133" local_entity="0" value="2" />
+        <value cell_index="134" local_entity="0" value="2" />
+        <value cell_index="135" local_entity="0" value="2" />
+        <value cell_index="136" local_entity="0" value="2" />
+        <value cell_index="137" local_entity="0" value="2" />
+        <value cell_index="138" local_entity="0" value="2" />
+        <value cell_index="139" local_entity="0" value="2" />
+        <value cell_index="140" local_entity="0" value="2" />
+        <value cell_index="141" local_entity="0" value="2" />
+        <value cell_index="142" local_entity="0" value="2" />
+        <value cell_index="143" local_entity="0" value="2" />
+        <value cell_index="144" local_entity="0" value="2" />
+        <value cell_index="145" local_entity="0" value="2" />
+        <value cell_index="146" local_entity="0" value="2" />
+        <value cell_index="147" local_entity="0" value="2" />
+        <value cell_index="148" local_entity="0" value="2" />
+        <value cell_index="149" local_entity="0" value="2" />
+        <value cell_index="150" local_entity="0" value="2" />
+        <value cell_index="151" local_entity="0" value="2" />
+        <value cell_index="152" local_entity="0" value="2" />
+        <value cell_index="153" local_entity="0" value="2" />
+        <value cell_index="154" local_entity="0" value="2" />
+        <value cell_index="155" local_entity="0" value="2" />
+        <value cell_index="156" local_entity="0" value="2" />
+        <value cell_index="157" local_entity="0" value="2" />
+        <value cell_index="158" local_entity="0" value="2" />
+        <value cell_index="159" local_entity="0" value="2" />
+        <value cell_index="160" local_entity="0" value="2" />
+        <value cell_index="161" local_entity="0" value="2" />
+        <value cell_index="162" local_entity="0" value="2" />
+        <value cell_index="163" local_entity="0" value="2" />
+        <value cell_index="164" local_entity="0" value="2" />
+        <value cell_index="165" local_entity="0" value="2" />
+        <value cell_index="166" local_entity="0" value="2" />
+        <value cell_index="167" local_entity="0" value="2" />
+        <value cell_index="168" local_entity="0" value="2" />
+        <value cell_index="169" local_entity="0" value="2" />
+        <value cell_index="170" local_entity="0" value="2" />
+        <value cell_index="171" local_entity="0" value="2" />
+        <value cell_index="172" local_entity="0" value="2" />
+        <value cell_index="173" local_entity="0" value="2" />
+        <value cell_index="174" local_entity="0" value="2" />
+        <value cell_index="175" local_entity="0" value="2" />
+        <value cell_index="176" local_entity="0" value="2" />
+        <value cell_index="177" local_entity="0" value="2" />
+        <value cell_index="178" local_entity="0" value="2" />
+        <value cell_index="179" local_entity="0" value="2" />
+        <value cell_index="180" local_entity="0" value="2" />
+        <value cell_index="181" local_entity="0" value="2" />
+        <value cell_index="182" local_entity="0" value="2" />
+        <value cell_index="183" local_entity="0" value="2" />
+        <value cell_index="184" local_entity="0" value="2" />
+        <value cell_index="185" local_entity="0" value="2" />
+        <value cell_index="186" local_entity="0" value="2" />
+        <value cell_index="187" local_entity="0" value="2" />
+        <value cell_index="188" local_entity="0" value="2" />
+        <value cell_index="189" local_entity="0" value="2" />
+        <value cell_index="190" local_entity="0" value="2" />
+        <value cell_index="191" local_entity="0" value="2" />
+        <value cell_index="192" local_entity="0" value="2" />
+        <value cell_index="193" local_entity="0" value="2" />
+        <value cell_index="194" local_entity="0" value="2" />
+        <value cell_index="195" local_entity="0" value="2" />
+        <value cell_index="196" local_entity="0" value="2" />
+        <value cell_index="197" local_entity="0" value="2" />
+        <value cell_index="198" local_entity="0" value="2" />
+        <value cell_index="199" local_entity="0" value="2" />
+        <value cell_index="200" local_entity="0" value="2" />
+        <value cell_index="201" local_entity="0" value="2" />
+        <value cell_index="202" local_entity="0" value="2" />
+        <value cell_index="203" local_entity="0" value="2" />
+        <value cell_index="204" local_entity="0" value="2" />
+        <value cell_index="205" local_entity="0" value="2" />
+        <value cell_index="206" local_entity="0" value="2" />
+        <value cell_index="207" local_entity="0" value="2" />
+        <value cell_index="208" local_entity="0" value="2" />
+        <value cell_index="209" local_entity="0" value="2" />
+        <value cell_index="210" local_entity="0" value="2" />
+        <value cell_index="211" local_entity="0" value="2" />
+        <value cell_index="212" local_entity="0" value="2" />
+        <value cell_index="213" local_entity="0" value="2" />
+        <value cell_index="214" local_entity="0" value="2" />
+        <value cell_index="215" local_entity="0" value="2" />
+        <value cell_index="216" local_entity="0" value="2" />
+        <value cell_index="217" local_entity="0" value="2" />
+        <value cell_index="218" local_entity="0" value="2" />
+        <value cell_index="219" local_entity="0" value="2" />
+        <value cell_index="220" local_entity="0" value="2" />
+        <value cell_index="221" local_entity="0" value="2" />
+        <value cell_index="222" local_entity="0" value="2" />
+        <value cell_index="223" local_entity="0" value="2" />
+        <value cell_index="224" local_entity="0" value="2" />
+        <value cell_index="225" local_entity="0" value="2" />
+        <value cell_index="226" local_entity="0" value="2" />
+        <value cell_index="227" local_entity="0" value="2" />
+        <value cell_index="228" local_entity="0" value="2" />
+        <value cell_index="229" local_entity="0" value="2" />
+        <value cell_index="230" local_entity="0" value="2" />
+        <value cell_index="231" local_entity="0" value="2" />
+        <value cell_index="232" local_entity="0" value="2" />
+        <value cell_index="233" local_entity="0" value="2" />
+        <value cell_index="234" local_entity="0" value="2" />
+        <value cell_index="235" local_entity="0" value="2" />
+        <value cell_index="236" local_entity="0" value="2" />
+        <value cell_index="237" local_entity="0" value="2" />
+        <value cell_index="238" local_entity="0" value="2" />
+        <value cell_index="239" local_entity="0" value="2" />
+        <value cell_index="240" local_entity="0" value="2" />
+        <value cell_index="241" local_entity="0" value="2" />
+        <value cell_index="242" local_entity="0" value="2" />
+      </mesh_value_collection>
+    </domains>
+  </mesh>
+</dolfin>

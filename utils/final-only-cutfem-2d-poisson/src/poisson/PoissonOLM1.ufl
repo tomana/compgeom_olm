@@ -1,0 +1,9 @@
+cell = triangle
+
+V = FiniteElement("CG", cell, 1)
+
+u = TrialFunction(V)
+v = TestFunction(V)
+
+# Standard assembly over uncut cells
+a = inner(grad(u), grad(v))*dx

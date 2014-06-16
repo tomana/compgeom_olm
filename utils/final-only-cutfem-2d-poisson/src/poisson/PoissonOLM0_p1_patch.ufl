@@ -1,0 +1,14 @@
+cell = triangle
+
+V = FiniteElement("CG", cell, 1)
+
+u = TrialFunction(V)
+v = TestFunction(V)
+
+dxq = dc(1, metadata={"num_cells": 1})
+
+# Standard assembly over uncut cells
+a = inner(grad(u), grad(v))*dx(0)
+
+# Integrate same form over cut cells (marked with 1)
+a += inner(grad(u), grad(v))*dxq

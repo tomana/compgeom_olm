@@ -1,4 +1,5 @@
 #include "TesselateMeshIntersect.h"
+#include <dolfin/common/Timer.h>
 
 TesselateMeshIntersect::TesselateMeshIntersect() :
     overlapped_triangles_triangulation(new cutfem::CutMesh(1))
@@ -13,7 +14,7 @@ void TesselateMeshIntersect::init(dolfin::Mesh *mesh_input, dolfin::Mesh *collid
     mesh = mesh_input;
     collidingMesh = collidingMesh_input;
     dolfin::CellFunction<size_t> test(*mesh, 1);
-    _domain_marker = boost::shared_ptr< dolfin::CellFunction<size_t> >(new dolfin::CellFunction<size_t>(*mesh,1));
+    _domain_marker = std::shared_ptr< dolfin::CellFunction<size_t> >(new dolfin::CellFunction<size_t>(*mesh,1));
 
     _interior_facet_marker[0] = boost::shared_ptr<dolfin::FacetFunction<size_t> >(new dolfin::FacetFunction<size_t>(*mesh,2));
     _interior_facet_marker[1] = boost::shared_ptr<dolfin::FacetFunction<size_t> >(new dolfin::FacetFunction<size_t>(*mesh,2));
@@ -37,7 +38,7 @@ void TesselateMeshIntersect::triangulate_first()
         dolfin::VertexIterator v(pickcell);
 
 
-        std::vector<triangulate::TriFacet > facets;
+        std::vector<TesselateTriangle::TriFacet > facets;
         for (int j = 0; j < border_triangle_facet_set_first[(*i).first].size(); j++)
         {
             std::pair<size_t, size_t> cpair = border_triangle_facet_set_first[(*i).first][j];
@@ -61,7 +62,7 @@ void TesselateMeshIntersect::triangulate_first()
             dolfin::Point fv0 = dolfin::Point(p0[0], p0[1]);
             dolfin::Point fv1 = dolfin::Point(p1[0], p1[1]);
 
-            triangulate::TriFacet newfacet;
+            TesselateTriangle::TriFacet newfacet;
 
             newfacet.fv0 = fv0;
             newfacet.fv1 = fv1;
@@ -110,7 +111,7 @@ void TesselateMeshIntersect::triangulate_first()
         triangle.first.push_back(second_point);
         triangle.first.push_back(third_point);
 
-        triangle = triangulate::compute_triangulation_all_facets(triangle.first, facets);
+        triangle = TesselateTriangle::compute_triangulation_all_facets(triangle.first, facets);
 
         for (int j = 0; j < triangle.second.size(); j ++)
         {
@@ -203,16 +204,12 @@ void TesselateMeshIntersect::cutfem_conformer()
     subtriangulation_editor.close();
 
 
-    // SUMMING BECAUSE DYNAMIC MESH EDITOR DOES NOT WORK FOR CELL TYPE INTERVAL
+    // Summing up interactions first since dynamic mesh editor does not work.
+    // Relevant geometrical computations done in next for loop.
     size_t l = 0;
     for (boost::unordered_map<size_t, std::vector< std::pair<size_t, size_t> > >::iterator i = border_triangle_facet_set_first.begin(); i != border_triangle_facet_set_first.end(); i++)
     {
-        //size_t cell = (*i).first;
-
-        //dolfin::Cell cell2(*mesh, (*i).first);
-
         size_t cell = (*i).first;
-        //cout << cell << endl;
 
         dolfin::Cell pickcell(*mesh, cell);
         dolfin::VertexIterator v(pickcell);
@@ -220,8 +217,6 @@ void TesselateMeshIntersect::cutfem_conformer()
         {
             std::pair<size_t, size_t> cpair = (*i).second[j];
             dolfin::Cell cell(*collidingMesh, cpair.first);
-            //dolfin::FacetIterator v(cell);
-            //drawLines2D(v[0].point(),v[1].point());
 
             // Create facet from the mesh and local facet number
             dolfin::Facet f(cell.mesh(), cell.entities(1)[cpair.second]);
@@ -238,22 +233,25 @@ void TesselateMeshIntersect::cutfem_conformer()
             const double* p1 = geometry.x(v1);
 
 
-            // BOTH POINTS INSIDE CELL, ADD
+            // Both points inside cell
             if(cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p0[0], p0[1]))
                     && cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p1[0], p1[1])))
             {
                 l += 1;
             }
+            // One point inside cell
             else if(!cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p0[0], p0[1]))
                     && cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p1[0], p1[1])))
             {
                 l += 1;
             }
+            // One point inside cell
             else if(cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p0[0], p0[1]))
                     && !cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p1[0], p1[1])))
             {
                 l += 1;
             }
+            // Both point outside cell, still intersect
             else if(!cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p0[0], p0[1]))
                     && !cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p1[0], p1[1])))
             {
@@ -282,16 +280,10 @@ void TesselateMeshIntersect::cutfem_conformer()
     interface_editor.init_vertices(l*2);
     interface_editor.init_cells(l);
 
-    for (boost::unordered_map<size_t, std::vector< std::pair<size_t, size_t> > >::iterator i = border_triangle_facet_set_first.begin(); i != border_triangle_facet_set_first.end(); i++)
+    // This routine segments the interface
+    for (boost::unordered_map<size_t, std::vector< std::pair<size_t, size_t> > >::iterator i = border_triangle_facet_set_first.begin(); i != border_triangle_facet_set_first.end(); i++ )
     {
-        //size_t cell = (*i).first;
-
-        //dolfin::Cell cell2(*mesh, (*i).first);
-
         size_t cell = (*i).first;
-
-        //cout << cell << endl;
-
         dolfin::Cell pickcell(*mesh, cell);
         dolfin::VertexIterator v(pickcell);
         for (int j = 0; j < (*i).second.size(); j++)
@@ -316,7 +308,8 @@ void TesselateMeshIntersect::cutfem_conformer()
             const double* p0 = geometry.x(v0);
             const double* p1 = geometry.x(v1);
 
-
+            // If both point on facet lies within the cell intersected by the
+            // interface, just add the facet as a whole
             if(cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p0[0], p0[1]))
                     && cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p1[0], p1[1])))
             {
@@ -325,22 +318,24 @@ void TesselateMeshIntersect::cutfem_conformer()
                 interface_editor.add_cell(m, m*2, m*2 + 1);
                 facets_triangulation->parent_entity_maps()[0][m] = (*i).first;
                 facets_triangulation->parent_entity_maps()[1][m] = cpair.first;
+                facets_triangulation->facet_normals().push_back(-f.normal(0));
+                facets_triangulation->facet_normals().push_back(-f.normal(1));
                 m += 1;
 
             }
+            // If one endpoint on the facet is outside the intersected cell and
+            // one inside, compute intersection. Subject to numerical errors, see comment within.
             else if(!cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p0[0], p0[1]))
                     && cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p1[0], p1[1])))
             {
-                // COMPUTE INTERSECTION p1 to p0, iterate over cell facets..
-
+                // Computing intersection p1 to p0, iterate over cell facets.
                 dolfin::Point i0;
+                float prev_distance = -FLT_MAX;
                 for (int i = 0; i < 3; i++)
                 {
                     dolfin::Facet trifacet(pickcell.mesh(), pickcell.entities(1)[i]);
                     if(cutfem::GeometryKernel::do_intersect(trifacet,f))
                     {
-
-                        // THIS IS NASTY, BUT THIS IS HOW ITS DONE IN OTHER CODES IN DOLFIN
                         // Get global index of vertices on the facet
                         const std::size_t v0 = trifacet.entities(0)[0];
                         const std::size_t v1 = trifacet.entities(0)[1];
@@ -355,32 +350,47 @@ void TesselateMeshIntersect::cutfem_conformer()
                         dolfin::Point pv0 = dolfin::Point(p0[0], p0[1]);
                         dolfin::Point pv1 = dolfin::Point(p1[0], p1[1]);
 
-                        i0 = intersection_two_lines(fv0, fv1, pv0, pv1);
+                        //i0 = intersection_two_lines(fv0, fv1, pv0, pv1);
+
+                        // The next test, makes this procedure more computationally robust.
+                        // If a facet endpoint lies on a facet in the intersected triangle and the
+                        // facet intersects another facet, the point we are really interested in is where the interface facet
+                        // "fully" intersects the triangle facet, not where the facet endpoint lies on the triangles edge.
+                        // The facet fully intersecting a triangle facet always make a line that is longer than the line returned
+                        // from the facet endpoint lying on the triangle edge.
+                        dolfin::Point i_test = intersection_two_lines(fv0, fv1, pv0, pv1);
+                        if(i_test.distance(dolfin::Point(p1[0], p1[1])) > prev_distance)
+                        {
+                            i0 = i_test;
+                            prev_distance = i_test.distance(dolfin::Point(p1[0], p1[1]));
+                        }
                     }
                 }
-
-                // here, i0 is coordinate of intersection
+                // Now i0 is coordinate of intersection
 
                 interface_editor.add_vertex(m*2, i0);
                 interface_editor.add_vertex(m*2+1, dolfin::Point(p1[0], p1[1]));
                 interface_editor.add_cell(m, m*2, m*2 + 1);
                 facets_triangulation->parent_entity_maps()[0][m] = (*i).first;
                 facets_triangulation->parent_entity_maps()[1][m] = cpair.first;
+                facets_triangulation->facet_normals().push_back(-f.normal(0));
+                facets_triangulation->facet_normals().push_back(-f.normal(1));
                 m += 1;
 
             }
+            // If one endpoint on the facet is outside the intersected cell and
+            // one inside, compute intersection. Subject to numerical errors, see comment within.
             else if(cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p0[0], p0[1]))
                     && !cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p1[0], p1[1])))
             {
-                // COMPUTE INTERSECTION p0 to p1, iterate over cell facets..
+                // Computing intersection p0 to p1, iterate over cell facets.
                 dolfin::Point i1;
+                float prev_distance = -FLT_MAX;
                 for (int i = 0; i < 3; i++)
                 {
                     dolfin::Facet trifacet(pickcell.mesh(), pickcell.entities(1)[i]);
                     if(cutfem::GeometryKernel::do_intersect(trifacet,f))
                     {
-
-                        // THIS IS NASTY, BUT THIS IS HOW ITS DONE IN OTHER CODES IN DOLFIN
                         // Get global index of vertices on the facet
                         const std::size_t v0 = trifacet.entities(0)[0];
                         const std::size_t v1 = trifacet.entities(0)[1];
@@ -395,27 +405,41 @@ void TesselateMeshIntersect::cutfem_conformer()
                         dolfin::Point pv0 = dolfin::Point(p0[0], p0[1]);
                         dolfin::Point pv1 = dolfin::Point(p1[0], p1[1]);
 
-                        i1 = intersection_two_lines(fv0, fv1, pv0, pv1);
+                        // i1 = intersection_two_lines(fv0, fv1, pv0, pv1);
+
+                        // This test makes this procedure more computationally robust.
+                        // If a facet endpoint lies on a facet in the intersected triangle and the
+                        // facet intersects another facet, the point we are really interested in is where the interface facet
+                        // "fully" intersects the triangle facet, not where the facet endpoint lies on the triangles edge.
+                        // The facet fully intersecting a triangle facet always make a line that is longer than the line returned
+                        // from the facet endpoint lying on the triangle edge.
+                        dolfin::Point i_test = intersection_two_lines(fv0, fv1, pv0, pv1);
+                        if(i_test.distance(dolfin::Point(p0[0], p0[1])) > prev_distance)
+                        {
+                            i1 = i_test;
+                            prev_distance = i_test.distance(dolfin::Point(p0[0], p0[1]));
+                        }
+
                     }
                 }
+                // Now i1 is coordinate of intersection
 
-                // here, i1 is coordinate of intersection
                 interface_editor.add_vertex(m*2, dolfin::Point(p0[0], p0[1]));
                 interface_editor.add_vertex(m*2+1, dolfin::Point(i1[0], i1[1]));
                 interface_editor.add_cell(m, m*2, m*2 + 1);
                 facets_triangulation->parent_entity_maps()[0][m] = (*i).first;
                 facets_triangulation->parent_entity_maps()[1][m] = cpair.first;
+                facets_triangulation->facet_normals().push_back(-f.normal(0));
+                facets_triangulation->facet_normals().push_back(-f.normal(1));
                 m += 1;
 
             }
+            // If none of the endpoints of the facet lies within, we need two points to finde the
+            // segmentation of the interface.
             else if(!cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p0[0], p0[1]))
                     && !cutfem::GeometryKernel::do_intersect(pickcell, dolfin::Point(p1[0], p1[1])))
             {
-                /// HERE SOMETHING NEEDS TO CHANGE IF WE ARE GONNA DO THE WHOLE THING WITHOUT
-                /// PRIMTIVE-PRIMITIVE INTERSECTION, THEN WE HAVE TO CHECK IF THE LINE INTERSECTS
-                /// THE PRIMTIVIE AT ALL. IF IT DOESN'T, CAN WE SAFELY ADD IT TO T_1 or T_2?
-                /// KEEPING TRACK OF WHICH FACETS ARE AT ALL INTERSECTED SHOULD NOT BE A PROBLEM.
-                // COMPUTE INTERSECTION p0 to p1, iterate over cell facets..
+                // Comput intersections p0 to p1, iterate over cell facets.
                 size_t intersection_index= 0;
                 dolfin::Point i0;
                 dolfin::Point i1;
@@ -424,8 +448,6 @@ void TesselateMeshIntersect::cutfem_conformer()
                     dolfin::Facet trifacet(pickcell.mesh(), pickcell.entities(1)[i]);
                     if(cutfem::GeometryKernel::do_intersect(trifacet,f))
                     {
-
-                        // THIS IS NASTY, BUT THIS IS HOW ITS DONE IN OTHER CODES IN DOLFIN
                         // Get global index of vertices on the facet
                         const std::size_t v0 = trifacet.entities(0)[0];
                         const std::size_t v1 = trifacet.entities(0)[1];
@@ -439,30 +461,42 @@ void TesselateMeshIntersect::cutfem_conformer()
 
                         dolfin::Point pv0 = dolfin::Point(p0[0], p0[1]);
                         dolfin::Point pv1 = dolfin::Point(p1[0], p1[1]);
-                        if(intersection_index == 0) {
-                        i0 = intersection_two_lines(fv0, fv1, pv0, pv1);
-                        intersection_index += 1;
-                        } else if(intersection_index == 1) {
-                        i1 = intersection_two_lines(fv0, fv1, pv0, pv1);
-                        intersection_index += 1;
-                        } else if(intersection_index == 2) {
-                        std::cout << "Something wierd is going on, a line intersects a triangle on 3 sides" << std::endl;
+
+                        // This case should not become ambigouous in any
+                        // case, since if both facet endpoints lies on triangle edges
+                        // they are distinct for each facet and the intersection test will return
+                        // these two facet endpoints as interface segment.
+                        if(intersection_index == 0)
+                        {
+                            i0 = intersection_two_lines(fv0, fv1, pv0, pv1);
+                            intersection_index += 1;
                         }
+                        else if(intersection_index == 1)
+                        {
+                            i1 = intersection_two_lines(fv0, fv1, pv0, pv1);
+                            intersection_index += 1;
+                        }
+                        else if(intersection_index > 2)
+                        {
+                            std::cout << "Something wierd is going on, a line intersects a triangle on 3 sides" << std::endl;
+                        }
+
                     }
                 }
+                // Now i0 and i1 is coordinate of intersection
 
-                // here, i1 is coordinate of intersection
                 interface_editor.add_vertex(m*2, dolfin::Point(i0[0], i0[1]));
                 interface_editor.add_vertex(m*2+1, dolfin::Point(i1[0], i1[1]));
                 interface_editor.add_cell(m, m*2, m*2 + 1);
                 facets_triangulation->parent_entity_maps()[0][m] = (*i).first;
                 facets_triangulation->parent_entity_maps()[1][m] = cpair.first;
+                facets_triangulation->facet_normals().push_back(-f.normal(0));
+                facets_triangulation->facet_normals().push_back(-f.normal(1));
                 m += 1;
 
             }
         }
     }
-    //std::cout << m << std::endl;
     interface_editor.close();
 }
 
@@ -470,11 +504,24 @@ void TesselateMeshIntersect::markborder()
 {
     mesh->init();
     collidingMesh->init();
-    //std::cout << "Marking border" << std::endl;
-    tree = new dolfin::BoundingVolumeTree(*mesh, "SimpleCartesian", "DOP26", true);
+    
+    
+    std::clock_t start;
+    double duration;
+
+    start = std::clock();
+    dolfin::Timer timer_bvh("Bounding volume hierarchy, construction and traversal");
+    timer_bvh.start();
+    tree = new dolfin::BoundingVolumeTree(*mesh, "SimpleCartesian", "DOP6", false);
     intersectionsetFirstMesh.clear();
     tree->all_intersected_entities(*collidingMesh, intersectionsetFirstMesh);
+    timer_bvh.stop();
+       duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
 
+    std::cout<< "clock time BVH " << duration <<'\n';
+
+
+    
     dolfin::CellFunction<bool> cell_markers(*mesh);
     cell_markers.set_all(true);
 
@@ -493,13 +540,15 @@ void TesselateMeshIntersect::markborder()
         {
             cell_markers[(*i).first] = false;
 
-            // SKETCHY, BUT WORKS FOR FULLY SUBMERGED COLLIDING MESH
-
+            // Works for fully submerged meshes
             size_t cell = (*i).first;
             dolfin::MeshEntity pickcell(*mesh, mesh->topology().dim(), cell);
             bool completelyoverlapped = true;
+
+            //Going through all neighbours
             for (int j = 0; j < pickcell.num_entities(mesh->topology().dim()); j++)
             {
+                //If neighbour is NOT found in intersection set, then mark with 1.
                 if (intersectionsetFirstMesh.find(pickcell.entities(mesh->topology().dim())[j]) == intersectionsetFirstMesh.end())
                 {
                     cell_markers[cell] = false;
@@ -507,16 +556,76 @@ void TesselateMeshIntersect::markborder()
                     for(int k = 0; k < intersectionsetFirstMesh[(*i).first].size(); k++)
                     {
                         intersectionsetFirst_1_Mesh[(*i).first].push_back(intersectionsetFirstMesh[(*i).first][k]);
-                        std::vector<size_t> test;
-                        intersectionsetSecond_1_Mesh[intersectionsetFirstMesh[(*i).first][k]] = test;
+                        std::vector<size_t> empty_vec;
+                        intersectionsetSecond_1_Mesh[intersectionsetFirstMesh[(*i).first][k]] = empty_vec;
                         domain_marker[(*i).first] = 1;
                     }
                 }
             }
+
+
+            // If triangles close to border are overlapped, if completelyoverlapped has not been set to false yet, then do this:
             if(completelyoverlapped)
             {
-                std::vector<size_t> test;
-                intersectionsetFirst_2_Mesh[(*i).first] = test;
+                // Checking if vertex is incident with any border facets.
+                dolfin::MeshEntity pickcell(*mesh, collidingMesh->topology().dim(), cell);
+                bool mesh_exterior = false;
+                dolfin::VertexIterator v(pickcell);
+                for (int m = 0; m < 3; m ++)
+                {
+                    for (int l = 0; l < v[m].num_entities(2); l++)
+                    {
+                        dolfin::Facet facet(*mesh, v[m].entities(1)[l]);
+                        if(facet.exterior()) mesh_exterior = true;
+                    }
+                }
+
+                if(mesh_exterior)
+                {
+                    //if (intersectionsetFirstMesh.find(pickcell.entities(mesh->topology().dim())[j]) == intersectionsetFirstMesh.end()){/
+                    // If it is exterior, and intersected, just mark it 1 for now. Since its assumed that the overlapping mesh is submerged.
+                    cell_markers[cell] = false;
+                    completelyoverlapped = false;
+                    for(int k = 0; k < intersectionsetFirstMesh[(*i).first].size(); k++)
+                    {
+                        intersectionsetFirst_1_Mesh[(*i).first].push_back(intersectionsetFirstMesh[(*i).first][k]);
+                        std::vector<size_t> empty_vec;
+                        intersectionsetSecond_1_Mesh[intersectionsetFirstMesh[(*i).first][k]] = empty_vec;
+                        domain_marker[(*i).first] = 1;
+                    }
+                    //}
+
+                    // The next loop is more thorough, maybe not necassary. Useful for extending to non-submerged, perhaps.
+                    /*
+                    for(int k = 0; k < intersectionsetFirstMesh[(*i).first].size(); k++)
+                    {
+                        size_t cell_collidingmesh= intersectionsetFirstMesh[(*i).first][k];
+                        //cout << cell << endl;
+                        dolfin::MeshEntity pickcell_colliding(*collidingMesh, collidingMesh->topology().dim(), cell_collidingmesh);
+                        for (dolfin::FacetIterator facet_colliding(pickcell_colliding); !facet_colliding.end(); ++facet_colliding)
+                        {
+                            if(facet_colliding->exterior())
+                            {
+                                cell_markers[cell] = false;
+                                completelyoverlapped = false;
+                                for(int j = 0; j < intersectionsetFirstMesh[(*i).first].size(); j++)
+                                {
+                                    intersectionsetFirst_1_Mesh[(*i).first].push_back(intersectionsetFirstMesh[(*i).first][j]);
+                                    std::vector<size_t> empty_vec;
+                                    intersectionsetSecond_1_Mesh[intersectionsetFirstMesh[(*i).first][j]] = empty_vec;
+                                    domain_marker[(*i).first] = 1;
+                                }
+                            }
+                        }
+                    }
+                    */
+                }
+            }
+
+            if(completelyoverlapped)
+            {
+                std::vector<size_t> empty_vec;
+                intersectionsetFirst_2_Mesh[(*i).first] = empty_vec;
                 cell_markers[cell] = false;
                 domain_marker[(*i).first] = 2;
             }
@@ -537,11 +646,9 @@ void TesselateMeshIntersect::markborder()
     for (boost::unordered_map<size_t, std::vector< size_t> >::iterator i = intersectionsetFirst_1_Mesh.begin(); i != intersectionsetFirst_1_Mesh.end(); i++)
     {
         size_t cell = (*i).first;
-        //cout << cell << endl;
         dolfin::Cell pickcell(*mesh, cell);
         dolfin::VertexIterator v(pickcell);
 
-        // HERE SOME SELECTION GOES WRONG... OR, MAYBE NOT.
         for (dolfin::VertexIterator v(pickcell); !v.end(); ++v)
         {
             dolfin::Vertex testv = (*v);
@@ -551,7 +658,7 @@ void TesselateMeshIntersect::markborder()
             {
                 dolfin::Cell pickcell2(*mesh, testv.entities(mesh->topology().dim())[j]);
 
-                if (intersectionsetFirst_0_Mesh.find(pickcell2.index()) != intersectionsetFirst_0_Mesh.end())
+                if (intersectionsetFirst_2_Mesh.find(pickcell2.index()) == intersectionsetFirst_2_Mesh.end())
                 {
                     border_triangle_point_outside_set_first[(*i).first].push_back(localindex);
                 }
@@ -588,8 +695,9 @@ void TesselateMeshIntersect::markborderfacets()
     for (boost::unordered_map<size_t, std::vector< std::pair<size_t, size_t> > >::iterator i = border_triangle_facet_set_first.begin(); i != border_triangle_facet_set_first.end(); i++)
     {
 
-    sort( (*i).second.begin(), (*i).second.end() );
-            (*i).second.erase( unique( (*i).second.begin(), (*i).second.end() ), (*i).second.end() );
+        sort( (*i).second.begin(), (*i).second.end() );
+        (*i).second.erase( unique( (*i).second.begin(), (*i).second.end() ), (*i).second.end() );
+
     }
 }
 
@@ -608,6 +716,7 @@ void TesselateMeshIntersect::clearsets()
     border_triangles.clear();
 }
 
+/* For now disabled refine code.
 void TesselateMeshIntersect::refinemesh()
 {
     mesh->init();
@@ -657,17 +766,6 @@ void TesselateMeshIntersect::refinemeshborder()
     {
         if (intersectionsetFirstMesh[(*i).first].size() > 0)
         {
-            /*
-            if(intersectionsetFirstMesh[(*i).first])
-            for(int j = 0; j < intersectionsetFirstMesh[(*i).first].size(); j++) {
-                if(intersectionsetSecondMesh(intersectionsetFirstMesh[(*i).first].at(j))){
-
-
-                }
-
-            }
-            */
-            //intersectionsetFirst_1_Mesh[(*i).first].push_back(0);
             size_t cell = (*i).first;
             dolfin::MeshEntity pickcell(*mesh, mesh->topology().dim(), cell);
             bool test = false;
@@ -686,11 +784,7 @@ void TesselateMeshIntersect::refinemeshborder()
 
                 }
             }
-
-
         }
-
-
     }
 
     dolfin::Mesh test = dolfin::refine(*mesh, cell_markers);
@@ -751,56 +845,6 @@ void TesselateMeshIntersect::refinecollidingmeshborder()
     markborder();
     markborderfacets();
 }
-
-/*
-dolfin::Point TesselateMeshIntersect::line_plane_intersection(dolfin::Point l_0, dolfin::Point l_1, dolfin::Point p_0, dolfin::Point normal)
-{
-    dolfin::Point l = l_0 -l_1 ;
-    double d = ((p_0 - l_0).dot(normal))/(l.dot(normal));
-    return (d*l) + l_0;
-}
-
-bool TesselateMeshIntersect::point_on_line(dolfin::Point linePointA, dolfin::Point linePointB, dolfin::Point point)
-{
-    const double EPSILON = 0.0000000001f;
-
-    double a = (linePointB.y() - linePointA.y()) / (linePointB.x() - linePointA.x());
-
-    double b = linePointA.y() - a * linePointA.x();
-
-    double maxx = std::max(linePointA.x(), linePointB.x());
-    double minx = std::min(linePointA.x(), linePointB.x());
-    double maxy = std::max(linePointA.y(), linePointB.y());
-    double miny = std::min(linePointA.y(), linePointB.y());
-
-    if ( abs(point.y() - (a*point.x()+b)) < EPSILON)
-    {
-        if(point.y() <= maxy & point.y() >= miny & point.x() <= maxx & point.x() >= minx)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-void add_unique_point(std::vector< dolfin::Point> * vertices, dolfin::Point point)
-{
-    if (vertices->size() == 0)
-    {
-        vertices->push_back(point);
-    }
-    else
-    {
-        for (int i = 0; i < vertices->size(); i++)
-        {
-            if(vertices->at(i).squared_distance(point) < 0.00001)
-            {
-                return;
-            }
-        }
-        vertices->push_back(point);
-    }
-}
 */
 
 dolfin::Point TesselateMeshIntersect::intersection_two_lines(dolfin::Point p1, dolfin::Point p2, dolfin::Point p3, dolfin::Point p4)
@@ -819,53 +863,61 @@ dolfin::Point TesselateMeshIntersect::intersection_two_lines(dolfin::Point p1, d
     double x = ( pre * (x3 - x4) - (x1 - x2) * post ) / d;
     double y = ( pre * (y3 - y4) - (y1 - y2) * post ) / d;
 
-// Check if the x and y coordinates are within both lines
-    if ( x < std::min(x1, x2) || x > std::max(x1, x2) ||
-            x < std::min(x3, x4) || x > std::max(x3, x4) ) return NULL;
-    if ( y < std::min(y1, y2) || y > std::max(y1, y2) ||
-            y < std::min(y3, y4) || y > std::max(y3, y4) ) return NULL;
+    // Check if the x and y coordinates are within both lines
+    if ( x < std::min(x1, x2) - 3.0e-13 || x > std::max(x1, x2) + 3.0e-13 ||
+            x < std::min(x3, x4) - 3.0e-13 || x > std::max(x3, x4) + 3.0e-13 )
+    {
+        std::cout << "Returning null 1 " << std::endl;
+        return NULL;
+    }
 
-// Return the point of intersection
+    if ( y < std::min(y1, y2) - 3.0e-13 || y > std::max(y1, y2) + 3.0e-13||
+            y < std::min(y3, y4) - 3.0e-13 || y > std::max(y3, y4) + 3.0e-13)
+    {
+        std::cout << "Returning null 2" << std::endl;
+        return NULL;
+    }
+    // Return the point of intersection
     dolfin::Point ret = dolfin::Point(x, y);
     return ret;
 }
 
 void TesselateMeshIntersect::mark_ghost_penalty_facets()
 {
-  dolfin::CellFunction<size_t> domain_marker = *_domain_marker;
-  size_t _gdim = 2;
-  mesh->init(_gdim - 1, _gdim);
+    dolfin::CellFunction<size_t> domain_marker = *_domain_marker;
+    size_t _gdim = 2;
+    mesh->init(_gdim - 1, _gdim);
 
-  for (dolfin::FacetIterator facet(*mesh); !facet.end(); ++facet)
-  {
-    if (facet->num_entities(_gdim) != 1)
+    for (dolfin::FacetIterator facet(*mesh); !facet.end(); ++facet)
     {
-      const size_t marker0 =  domain_marker[ facet->entities(_gdim)[0] ];
-      const size_t marker1 =  domain_marker[ facet->entities(_gdim)[1] ];
-      // 1. Mark facet incident with a cut cell
-      if ((marker0 == 1 && marker1 == 1))
-      {
-        (*_interior_facet_marker[0])[*facet] = 1;
-        (*_interior_facet_marker[1])[*facet] = 1;
-      }
-      if((marker0 == 1 && marker1 == 0) || (marker0 == 0 && marker1 == 1))
-      {
-        (*_interior_facet_marker[0])[*facet] = 1;
-        (*_interior_facet_marker[1])[*facet] = 0;
-      }
-      if((marker0 == 1 && marker1 == 2) || (marker0 == 2 && marker1 == 1))
-        (*_interior_facet_marker[1])[*facet] = 1;
-      // 2. Mark interior facets
-      if ((marker0 == 0 && marker1 == 0))
-      {
-        (*_interior_facet_marker[0])[*facet] = 0;
-        (*_interior_facet_marker[1])[*facet] = 0;
-      }
-      if ((marker0 == 2 && marker1 == 2))
-      {
-        (*_interior_facet_marker[0])[*facet] = 2;
-        (*_interior_facet_marker[1])[*facet] = 2;
-      }
+        if (facet->num_entities(_gdim) != 1)
+        {
+            const size_t marker0 =  domain_marker[ facet->entities(_gdim)[0] ];
+            const size_t marker1 =  domain_marker[ facet->entities(_gdim)[1] ];
+            // 1. Mark facet incident with a cut cell
+            if ((marker0 == 1 && marker1 == 1))
+            {
+                (*_interior_facet_marker[0])[*facet] = 1;
+                (*_interior_facet_marker[1])[*facet] = 1;
+            }
+            if((marker0 == 1 && marker1 == 0) || (marker0 == 0 && marker1 == 1))
+            {
+                (*_interior_facet_marker[0])[*facet] = 1;
+                (*_interior_facet_marker[1])[*facet] = 0;
+            }
+            if((marker0 == 1 && marker1 == 2) || (marker0 == 2 && marker1 == 1))
+                (*_interior_facet_marker[1])[*facet] = 1;
+            // 2. Mark interior facets
+            if ((marker0 == 0 && marker1 == 0))
+            {
+                (*_interior_facet_marker[0])[*facet] = 0;
+                (*_interior_facet_marker[1])[*facet] = 0;
+            }
+            if ((marker0 == 2 && marker1 == 2))
+            {
+                (*_interior_facet_marker[0])[*facet] = 2;
+                (*_interior_facet_marker[1])[*facet] = 2;
+            }
+        }
     }
-  }
 }

@@ -1,0 +1,15 @@
+cell = triangle
+
+V = FiniteElement("CG", cell, 2)
+
+u = TrialFunction(V)
+v = TestFunction(V)
+f = Coefficient(V)
+
+n = FacetNormal(cell)
+h = 2.0*Circumradius(cell)
+
+# Standard assembly over uncut cells
+a = inner(grad(u), grad(v))*dx
+
+L = f*v*dx

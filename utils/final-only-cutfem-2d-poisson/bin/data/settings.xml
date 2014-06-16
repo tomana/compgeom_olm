@@ -1,0 +1,75 @@
+<Draw_u>
+	<zaxisscaler>0.88</zaxisscaler>
+	<transparency>201</transparency>
+	<svg_n_slider>0.5</svg_n_slider>
+	<color>104, 104, 104, 255</color>
+	<allscaler>555</allscaler>
+	<rotatez>255.6</rotatez>
+	<trans_u_z>0.0799999</trans_u_z>
+<Draw_mesh>
+		<draw_indexes>1</draw_indexes>
+		<draw_first_mesh>1</draw_first_mesh>
+		<draw_first_mesh_u>1</draw_first_mesh_u>
+		<draw_second_mesh>1</draw_second_mesh>
+		<draw_edited_mesh>1</draw_edited_mesh>
+		<draw_first_0>0</draw_first_0>
+		<draw_first_1>1</draw_first_1>
+		<draw_first_2>0</draw_first_2>
+		<draw_second_0>0</draw_second_0>
+		<draw_second_1>1</draw_second_1>
+		<draw_second_2>0</draw_second_2>
+		<draw_border_first>1</draw_border_first>
+		<draw_animate_triangulation>0</draw_animate_triangulation>
+		<draw_index_triangulation>0</draw_index_triangulation>
+		<mesh_Uniform>8</mesh_Uniform>
+		<mesh_res_X>8</mesh_res_X>
+		<mesh_res_Y>8</mesh_res_Y>
+		<mesh_res_Z>8</mesh_res_Z>
+		<cmesh_Uniform>8</cmesh_Uniform>
+		<cmesh_res_X>8</cmesh_res_X>
+		<cmesh_res_Y>8</cmesh_res_Y>
+		<cmesh_res_Z>8</cmesh_res_Z>
+	</Draw_mesh>
+<Draw_u/>
+<gamma_u>500</gamma_u>
+<Draw_solution>
+		<zaxisscaler>0.5</zaxisscaler>
+		<transparency>150</transparency>
+		<svg_n_slider>0.5</svg_n_slider>
+		<color>128, 128, 130, 255</color>
+		<allscaler>555</allscaler>
+		<rotatez>225</rotatez>
+		<trans_u_z>0.3</trans_u_z>
+		<trans_first_mesh>-0.1</trans_first_mesh>
+		<trans_second_mesh>0.04</trans_second_mesh>
+		<trans_t_0_1>-0.1</trans_t_0_1>
+		<trans_t_0_gamma>0.0799999</trans_t_0_gamma>
+		<trans_t_0_2>-0.22</trans_t_0_2>
+		<trans_triangulation_mesh>-0.04</trans_triangulation_mesh>
+		<trans_border_first>0</trans_border_first>
+		<gamma_u>10</gamma_u>
+	<firstcolor>255, 128, 128, 255</firstcolor>
+		<secondcolor>128, 128, 255, 255</secondcolor>
+	</Draw_solution>
+<Setup_mesh>
+		<draw_indexes>0</draw_indexes>
+		<draw_first_mesh>0</draw_first_mesh>
+		<draw_first_mesh_u>1</draw_first_mesh_u>
+		<draw_second_mesh>1</draw_second_mesh>
+		<draw_t_0_1>1</draw_t_0_1>
+		<draw_t_0_gamma>0</draw_t_0_gamma>
+		<draw_t_0_2>0</draw_t_0_2>
+		<draw_border_first>1</draw_border_first>
+		<draw_triangulation_mesh>1</draw_triangulation_mesh>
+		<draw_index_triangulation>0</draw_index_triangulation>
+		<mesh_Uniform>8</mesh_Uniform>
+		<mesh_res_X>8</mesh_res_X>
+		<mesh_res_Y>8</mesh_res_Y>
+		<mesh_res_Z>8</mesh_res_Z>
+		<cmesh_Uniform>8</cmesh_Uniform>
+		<cmesh_res_X>8</cmesh_res_X>
+		<cmesh_res_Y>8</cmesh_res_Y>
+		<cmesh_res_Z>8</cmesh_res_Z>
+	<draw_first_mesh_u_2>1</draw_first_mesh_u_2>
+	</Setup_mesh>
+</Draw_u>

@@ -49,6 +49,7 @@ public:
 
     std::shared_ptr<cutfem::CutMesh> overlapped_triangles_triangulation;
     std::shared_ptr<cutfem::CutMesh> facets_triangulation;
+    std::vector<double> interface_normals;
 
     void clearsets();
 
@@ -56,23 +57,25 @@ public:
     void markborder();
     void markborderfacets();
     void triangulate_first();
-    dolfin::Point line_plane_intersection(dolfin::Point l_0, dolfin::Point l_1, dolfin::Point p_0, dolfin::Point normal);
-    bool point_on_line(dolfin::Point linePointA, dolfin::Point linePointB, dolfin::Point point);
+
+    // LINE LINE INTERSECTION
+    dolfin::Point intersection_two_lines(dolfin::Point p1, dolfin::Point p2, dolfin::Point p3, dolfin::Point p4);
 
     // CUTFEM CONFORMER
     void cutfem_conformer();
 
-    boost::shared_ptr< dolfin::CellFunction<size_t> > _domain_marker;
+    std::shared_ptr< dolfin::CellFunction<size_t> > _domain_marker;
 
     void mark_ghost_penalty_facets();
     std::vector< boost::shared_ptr<dolfin::FacetFunction<size_t> > > _interior_facet_marker;
 
 
-    // REFINE THING
+    /*
+    // Refine
     void refinemesh();
     void refinemeshborder();
     void refinecollidingmeshborder();
+    */
 
-    // LINE LINE INTERSECTION
-    dolfin::Point intersection_two_lines(dolfin::Point p1, dolfin::Point p2, dolfin::Point p3, dolfin::Point p4);
+
 };

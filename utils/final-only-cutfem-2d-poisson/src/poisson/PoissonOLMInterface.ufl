@@ -1,0 +1,22 @@
+cell = triangle
+
+n = FacetNormal(cell)
+h = 2.0*Circumradius(cell)
+
+V = FiniteElement("CG", cell, 1)
+
+u = TrialFunction(V)
+v = TestFunction(V)
+
+dSq = dc(0, metadata={"num_cells": 2})
+
+gamma = Coefficient(V)
+
+# Averaged version
+a  = -inner(avg(grad(u)), jump(v, n))*dSq
+a += -inner(avg(grad(v)), jump(u, n))*dSq
+
+# One-side flux (better for convergence)
+a  = -inner(grad(u)("-"), jump(v, n))*dSq
+a += -inner(grad(v)("-"), jump(u, n))*dSq
+a += gamma/h("-")*inner(jump(u),jump(v))*dSq

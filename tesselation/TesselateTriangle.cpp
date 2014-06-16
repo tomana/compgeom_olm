@@ -39,7 +39,7 @@ std::vector<dolfin::Point> triangulate::compute_triangulation_all_facets(std::ve
 */
 
 
-std::pair <std::vector<dolfin::Point>, std::vector< std::vector<size_t > > > triangulate::compute_triangulation_all_facets(std::vector<dolfin::Point> triangle, std::vector<TriFacet> facets)
+std::pair <std::vector<dolfin::Point>, std::vector< std::vector<size_t > > > TesselateTriangle::compute_triangulation_all_facets(std::vector<dolfin::Point> triangle, std::vector<TriFacet> facets)
 {
 
     std::vector< std::vector<size_t> > triangle_index;
@@ -75,7 +75,7 @@ std::pair <std::vector<dolfin::Point>, std::vector< std::vector<size_t > > > tri
 }
 
 
-std::pair<std::vector<dolfin::Point>,  std::vector< std::vector<size_t > > > triangulate::compute_triangulation_single_facet(std::vector<dolfin::Point> triangle, TriFacet facet, std::vector< std::vector <size_t > > triangle_index)
+std::pair<std::vector<dolfin::Point>,  std::vector< std::vector<size_t > > > TesselateTriangle::compute_triangulation_single_facet(std::vector<dolfin::Point> triangle, TriFacet facet, std::vector< std::vector <size_t > > triangle_index)
 {
     std::vector<dolfin::Point> triangle_new;
     std::vector< std::vector<size_t > > triangle_new_index;
@@ -110,7 +110,7 @@ std::pair<std::vector<dolfin::Point>,  std::vector< std::vector<size_t > > > tri
     return std::make_pair(triangle_new, triangle_new_index);
 }
 
-std::pair<std::vector<dolfin::Point>,  std::vector<size_t > > triangulate::compute_facet_triangulation(dolfin::Point v0, dolfin::Point v1, dolfin::Point v2, TriFacet facet)
+std::pair<std::vector<dolfin::Point>,  std::vector<size_t > > TesselateTriangle::compute_facet_triangulation(dolfin::Point v0, dolfin::Point v1, dolfin::Point v2, TriFacet facet)
 {
     std::vector<dolfin::Point > triangles;
     std::vector<size_t > triangles_index;
@@ -269,7 +269,7 @@ std::pair<std::vector<dolfin::Point>,  std::vector<size_t > > triangulate::compu
 
 }
 
-double triangulate::level_set_facet(dolfin::Point x, dolfin::Point p, dolfin::Point n)
+double TesselateTriangle::level_set_facet(dolfin::Point x, dolfin::Point p, dolfin::Point n)
 {
 
     return (x - p).dot(n);
@@ -286,7 +286,7 @@ double triangulate::level_set_facet(dolfin::Point x, dolfin::Point p, dolfin::Po
     */
 }
 
-dolfin::Point triangulate::linear_interp(dolfin::Point p_0, dolfin::Point p_1, TriFacet facet)
+dolfin::Point TesselateTriangle::linear_interp(dolfin::Point p_0, dolfin::Point p_1, TriFacet facet)
 {
     double phi_0 = level_set_facet(p_0, facet.fv0, facet.normal);
     double phi_1 = level_set_facet(p_1, facet.fv0, facet.normal);

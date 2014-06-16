@@ -1,0 +1,8 @@
+# H1 norm ufl file
+
+element = FiniteElement("Lagrange", triangle, 3)
+
+w = Coefficient(element)
+
+M = inner(grad(w),grad(w))*dx(0) + inner(grad(w),grad(w))*dx(1) + inner(w,w)*dx(0) + inner(w,w)*dx(1)
+

@@ -1,0 +1,9 @@
+<Draw_u>
+	<tree_cwidth>500</tree_cwidth>
+	<tree_cheight>175</tree_cheight>
+	<tree_swidth>405</tree_swidth>
+	<tree_sheight>40</tree_sheight>
+	<tree_center>0.01</tree_center>
+<Draw_u/>
+<svg_n_slider>0.5</svg_n_slider>
+</Draw_u>

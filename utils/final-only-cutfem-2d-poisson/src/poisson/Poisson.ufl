@@ -1,0 +1,21 @@
+V = FiniteElement("Lagrange", triangle, 1)
+F = FiniteElement("Lagrange", triangle, 2)
+
+u = TrialFunction(V)
+v = TestFunction(V)
+f = Coefficient(F)
+
+# Custom measures 
+# N.B. ATM dI assumes same elements on both sides
+dQ = dc(0, metadata={"num_cells": 1})
+dI = dc(1, metadata={"num_cells": 2})
+
+# Standard cells
+a = inner(grad(u), grad(v))*dx 
+# Cut elements 
+a += inner(grad(u), grad(v))*dQ
+# TODO: Add dI term
+
+L  = f*v*dx
+# FIXME: Bug when add custom integral. Name "values" is declared twice.
+#L += f*v*dQ

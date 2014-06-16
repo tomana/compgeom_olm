@@ -4,7 +4,7 @@
 #include <dolfin/mesh/Vertex.h>
 #include <dolfin/mesh/Cell.h>
 
-class triangulate
+class TesselateTriangle
 {
 public:
     struct TriFacet
